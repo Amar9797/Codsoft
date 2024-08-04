@@ -1,0 +1,52 @@
+import random
+import string
+
+def generate_password(length, complexity):
+    # Define the character sets based on complexity
+    if complexity == 1:
+        characters = string.ascii_letters
+    elif complexity == 2:
+        characters = string.ascii_letters + string.digits
+    else:
+        characters = string.ascii_letters + string.digits + string.punctuation
+    
+    # Generate the password
+    password = ''.join(random.choice(characters) for _ in range(length))
+    
+    return password
+
+def main():
+    print("Welcome to the Password Generator, Amar!")
+    
+    while True:
+        try:
+            # Prompt Amar to specify the desired length of the password
+            length = int(input("Amar, enter the desired length for your password: "))
+            if length < 1:
+                print("Amar, please enter a positive integer for length.")
+                continue
+            
+            # Prompt Amar to specify the desired complexity of the password
+            print("Amar, select complexity level: ")
+            print("1. Letters only")
+            print("2. Letters and digits")
+            print("3. Letters, digits, and punctuation")
+            complexity = int(input("Amar, enter the complexity level (1/2/3): "))
+            if complexity not in [1, 2, 3]:
+                print("Amar, please enter a valid complexity level (1, 2, or 3).")
+                continue
+            
+            # Generate and display the password
+            password = generate_password(length, complexity)
+            print(f"Amar, your generated password is: {password}")
+            
+            # Ask Amar if he wants to generate another password
+            another = input("Amar, do you want to generate another password? (yes/no): ").lower()
+            if another != "yes":
+                print("Thank you for using the Password Generator, Amar!")
+                break
+        except ValueError:
+            print("Amar, invalid input. Please enter a valid number.")
+
+if __name__ == "__main__":
+    main()

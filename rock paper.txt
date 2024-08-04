@@ -1,0 +1,60 @@
+import random
+
+# Function to get computer's choice
+def get_computer_choice():
+    choices = ["rock", "paper", "scissors"]
+    return random.choice(choices)
+
+# Function to determine the winner
+def determine_winner(user_choice, computer_choice):
+    if user_choice == computer_choice:
+        return "It's a tie!"
+    elif (user_choice == "rock" and computer_choice == "scissors") or \
+         (user_choice == "scissors" and computer_choice == "paper") or \
+         (user_choice == "paper" and computer_choice == "rock"):
+        return "You win, Amar!"
+    else:
+        return "You lose, Amar!"
+
+# Function to display scores
+def display_scores(user_score, computer_score):
+    print(f"Scores:\nAmar: {user_score}\nComputer: {computer_score}\n")
+
+def play_game():
+    user_score = 0
+    computer_score = 0
+
+    print("Welcome to Rock-Paper-Scissors, Amar!")
+    print("Instructions: Enter 'rock', 'paper', or 'scissors' to play. Enter 'exit' to quit.")
+
+    while True:
+        user_choice = input("Enter your choice, Amar: ").lower()
+        
+        if user_choice == "exit":
+            print("Thanks for playing, Amar!")
+            break
+        
+        if user_choice not in ["rock", "paper", "scissors"]:
+            print("Invalid choice, Amar. Please try again.")
+            continue
+
+        computer_choice = get_computer_choice()
+        print(f"Amar chose: {user_choice}")
+        print(f"Computer chose: {computer_choice}")
+
+        result = determine_winner(user_choice, computer_choice)
+        print(result)
+
+        if result == "You win, Amar!":
+            user_score += 1
+        elif result == "You lose, Amar!":
+            computer_score += 1
+
+        display_scores(user_score, computer_score)
+
+        play_again = input("Do you want to play another round, Amar? (yes/no): ").lower()
+        if play_again != "yes":
+            print("Thanks for playing, Amar!")
+            break
+
+play_game()
